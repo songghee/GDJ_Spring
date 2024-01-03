@@ -1,11 +1,15 @@
 package com.winter.app.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO {
 	
 	//상품 목록
 	public List<ProductDTO> getList() {
+		List<ProductDTO> ar = new ArrayList()<ProductDTO>();
+		
+		
 		return null;
 	}
 	//상품 디테일
