@@ -1,12 +1,13 @@
 package com.winter.app.regions;
 
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.winter.app.util.DBConnector;
@@ -14,17 +15,22 @@ import com.winter.app.util.DBConnector;
 @Repository
 public class RegionDAO {
 	
+	@Autowired
+	private SqlSession sqlSession;
+	
+	private final String namespace="com.winter.app.regions.RegionDAO.";
+	
 	//update
 	public int update(RegionDTO regionDTO) throws Exception {
 		Connection con = DBConnector.getConnector();
-		
+		//db 연결
 		String sql="UPDATE REGIONS SET REGION_NAME=? WHERE REGION_ID=?";
-		
+		//query 작성
 		PreparedStatement st = con.prepareStatement(sql);
-		
+		//임시전송
 		st.setString(1, regionDTO.getRegion_name());
 		st.setInt(2, regionDTO.getRegion_id());
-		
+		//? 수정
 		int result = st.executeUpdate();
 		
 		DBConnector.disConnect(st, con);
@@ -41,8 +47,8 @@ public class RegionDAO {
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		
-		st.setInt(1, regionDTO.getRegion_id());
-		st.setString(2, regionDTO.getRegion_name());
+		st.setInt(1, regionDTO.getRegion_id());//111
+		st.setString(2, regionDTO.getRegion_name());//""hi
 		
 		int result = st.executeUpdate();
 		
@@ -53,57 +59,66 @@ public class RegionDAO {
 	
 	//detail
 	public RegionDTO getDetail(RegionDTO regionDTO)throws Exception{
-		Connection con = DBConnector.getConnector();
-		
-		String sql = "SELECT * FROM REGIONS WHERE REGION_ID=?";
-		
-		PreparedStatement st = con.prepareStatement(sql);
-		
-		st.setInt(1, regionDTO.getRegion_id());
-		
-		ResultSet rs = st.executeQuery();
-		
-		RegionDTO resultDTO=null;
-		
-		if(rs.next()) {
-			resultDTO = new RegionDTO();
-			resultDTO.setRegion_id(rs.getInt("REGION_ID"));
-			resultDTO.setRegion_name(rs.getString("REGION_NAME"));
-		}
-		
-		return resultDTO;
+		return sqlSession.selectOne(namespace+"getDetail", regionDTO);
+	}		
+
+	public List<RegionDTO> getList()throws Exception{
+		return sqlSession.selectList(namespace+"getList");
 	}
+		
+//		Connection con = DBConnector.getConnector();
+//		
+//		String sql = "SELECT * FROM REGIONS WHERE REGION_ID=?";
+//		
+//		PreparedStatement st = con.prepareStatement(sql);
+//		
+//		st.setInt(1, regionDTO.getRegion_id());
+//		
+//		ResultSet rs = st.executeQuery();
+//		
+//		RegionDTO resultDTO=null;
 	
-	public List<RegionDTO> getList() throws Exception {
+//		List<RegionDTO> ar = new ArrayList<RegionDTO>();
+	
+//		while(rs.next()) {
+//			resultDTO = new RegionDTO(); 2 am// 
+//			resultDTO.setRegion_id(rs.getInt("REGION_ID"));
+//			resultDTO.setRegion_name(rs.getString("REGION_NAME"));
+//			ar.add(resultDTO);
+//		}
+//		
+//		return resultDTO;
+//	}
+	
+//	public List<RegionDTO> getList() throws Exception {
 	
 		//1. driver를 메모리에 로딩(객체 생성)
 		
-		Connection con =DBConnector.getConnector();
+//		Connection con =DBConnector.getConnector();
 		//3. Sql문 생성
-		String sql = "SELECT REGION_NAME, REGION_ID FROM REGIONS";
+//		String sql = "SELECT REGION_NAME, REGION_ID FROM REGIONS";
 			
 			//4. SQL문 미리 전송
-		PreparedStatement st = con.prepareStatement(sql);
+//		PreparedStatement st = con.prepareStatement(sql);
 			
 			//5.
 			
 			//6. 최종 전송 및 결과 처리
-		ResultSet rs = st.executeQuery();
+//		ResultSet rs = st.executeQuery();
 		
-		List<RegionDTO> ar = new ArrayList<RegionDTO>();
-		
-		while (rs.next()) {
-				//rs = 1, Europe
-			RegionDTO regionDTO = new RegionDTO();
-			int n = rs.getInt("REGION_ID");
-			regionDTO.setRegion_id(n);
-			regionDTO.setRegion_name(rs.getString("REGION_NAME"));
-			
-			ar.add(regionDTO);
-		}
-
-		DBConnector.disConnect(rs, st, con);
-		return ar;
-	}
+//		List<RegionDTO> ar = new ArrayList<RegionDTO>();
+//		
+//		while (rs.next()) {
+//				//rs = 1, Europe
+//			RegionDTO regionDTO = new RegionDTO();
+//			int n = rs.getInt("REGION_ID");
+//			regionDTO.setRegion_id(n);
+//			regionDTO.setRegion_name(rs.getString("REGION_NAME"));
+//			
+//			ar.add(regionDTO);
+//		}
+//
+//		DBConnector.disConnect(rs, st, con);
+//		return null;
 
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
+import com.winter.app.regions.RegionDAO;
+
 /**
  * Handles requests for the application home page.
  */
@@ -26,6 +28,8 @@ public class HomeController {
 	 */
 
 	
+
+	
 	//annotation : 설명+기능
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -37,7 +41,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-
+		
 		return "index";
 	}
 	

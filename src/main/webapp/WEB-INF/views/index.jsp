@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
 
-	<c:import url="/temps/bootStrap_css.jsp"></c:import>
+	
+	<c:import url="./temps/bootStrap_css.jsp"></c:import>
 
   </head>
   <body>
