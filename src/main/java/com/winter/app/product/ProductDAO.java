@@ -7,8 +7,7 @@ public class ProductDAO {
 	
 	//상품 목록
 	public List<ProductDTO> getList() {
-		List<ProductDTO> ar = new ArrayList()<ProductDTO>();
-		
+		List<ProductDTO> ar = new ArrayList<ProductDTO>();
 		
 		return null;
 	}
