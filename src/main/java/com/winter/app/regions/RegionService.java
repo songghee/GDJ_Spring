@@ -14,13 +14,18 @@ public class RegionService {
 	@Autowired
 	private RegionDAO regionDAO;
 	
+	//delete
+	public int delete(RegionDTO regionDTO)throws Exception{
+		return regionDAO.delete(regionDTO);
+	}
+	
 	//update
-	public RegionDTO update (RegionDTO regionDTO)throws Exception{
+	public int update(RegionDTO regionDTO)throws Exception{
 		return regionDAO.update(regionDTO);
 	}
 	
 	//insert
-	public RegionDTO add(RegionDTO regionDTO)throws Exception{
+	public int add(RegionDTO regionDTO)throws Exception{
 		return regionDAO.add(regionDTO);
 	}
 	
