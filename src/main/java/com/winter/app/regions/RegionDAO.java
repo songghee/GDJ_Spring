@@ -20,44 +20,64 @@ public class RegionDAO {
 	
 	private final String namespace="com.winter.app.regions.RegionDAO.";
 	
-	//update
-	public int update(RegionDTO regionDTO) throws Exception {
-		Connection con = DBConnector.getConnector();
-		//db 연결
-		String sql="UPDATE REGIONS SET REGION_NAME=? WHERE REGION_ID=?";
-		//query 작성
-		PreparedStatement st = con.prepareStatement(sql);
-		//임시전송
-		st.setString(1, regionDTO.getRegion_name());
-		st.setInt(2, regionDTO.getRegion_id());
-		//? 수정
-		int result = st.executeUpdate();
-		
-		DBConnector.disConnect(st, con);
-		
-		return result;
-		
+	//delete
+	//삭제
+	public int delete(RegionDTO regionDTO) throws Exception{
+		return sqlSession.delete(namespace+"delete", regionDTO);
 	}
+	
+	
+	//update
+	//수정
+	public int update(RegionDTO regionDTO) throws Exception {
+		return sqlSession.update(namespace+"update", regionDTO);
+	
+}
+		
+		
+		//		Connection con = DBConnector.getConnector();
+//		//db 연결
+//		String sql="UPDATE REGIONS SET REGION_NAME=? WHERE REGION_ID=?";
+//		//query 작성
+//		PreparedStatement st = con.prepareStatement(sql);
+//		//임시전송
+//		st.setString(1, regionDTO.getRegion_name());
+//		st.setInt(2, regionDTO.getRegion_id());
+//		//? 수정
+//		int result = st.executeUpdate();
+//		
+//		DBConnector.disConnect(st, con);
+//		
+//		return result;
+//		
+//	}
 	
 	//Insert
+	//추가
+	
 	public int add(RegionDTO regionDTO)throws Exception{
-		Connection con = DBConnector.getConnector();
-		
-		String sql = "INSERT INTO REGIONS VALUES(?, ?)";
-		
-		PreparedStatement st = con.prepareStatement(sql);
-		
-		st.setInt(1, regionDTO.getRegion_id());//111
-		st.setString(2, regionDTO.getRegion_name());//""hi
-		
-		int result = st.executeUpdate();
-		
-		DBConnector.disConnect(st, con);
-		
-		return result;
+		return sqlSession.insert(namespace+"add", regionDTO);
 	}
 	
+//	public int add(RegionDTO regionDTO)throws Exception{
+//		Connection con = DBConnector.getConnector();
+//		
+//		String sql = "INSERT INTO REGIONS VALUES(?, ?)";
+//		
+//		PreparedStatement st = con.prepareStatement(sql);
+//		
+//		st.setInt(1, regionDTO.getRegion_id());//111
+//		st.setString(2, regionDTO.getRegion_name());//""hi
+//		
+//		int result = st.executeUpdate();
+//		
+//		DBConnector.disConnect(st, con);
+//		
+//		return result;
+//	}
+	
 	//detail
+	//하나만 읽기
 	public RegionDTO getDetail(RegionDTO regionDTO)throws Exception{
 		return sqlSession.selectOne(namespace+"getDetail", regionDTO);
 	}		
@@ -65,7 +85,8 @@ public class RegionDAO {
 	public List<RegionDTO> getList()throws Exception{
 		return sqlSession.selectList(namespace+"getList");
 	}
-		
+}
+//		public RegionDTO getDetail(RegionDTO regionDTO)throws Exception{
 //		Connection con = DBConnector.getConnector();
 //		
 //		String sql = "SELECT * FROM REGIONS WHERE REGION_ID=?";
@@ -120,5 +141,4 @@ public class RegionDAO {
 //
 //		DBConnector.disConnect(rs, st, con);
 //		return null;
-
-}
+//}
