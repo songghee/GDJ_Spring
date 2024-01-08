@@ -10,9 +10,9 @@ public class DBConnector {
 	//1. IP:PORT
 	//2. ID, PW
 	public static Connection getConnector() throws Exception {
-		String user="user01";
-		String password="user01";
-		String url="jdbc:oracle:thin:@localhost:1521:xe";
+		String user="user02";
+		String password="user02";
+		String url="jdbc:oracle:thin:@13.125.162.118:1521:xe";
 		String driver="oracle.jdbc.driver.OracleDriver";
 		
 		//1. driver를 메모리에 로딩(객체 생성)

@@ -3,6 +3,35 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		    
-	 <mapper namespace="com.winter.app.sample.SampleDAO"></mapper>
+	 <mapper namespace="com.winter.app.sample.SampleDAO">
+	 
+	 <!-- delete -->
+	 <delete id="delete" parameterType="SampleDTO">
+	 	DELETE COUNTRYES WHERE COUNTRY_ID=#{country_id}
+	 </delete>
+	 
+	 <!-- update -->
+	 <update id="update" parameterType="SampleDTO">
+	 UPDATE COUNTRYES SET COUNTRY_NAME=#{country_name}
+	 WHERE COUNTRY_ID=#{country_id}
+	 </update>
+	 
+	 <!-- insert -->
+	 <insert id="add" parameterType="SampleDTO">
+	 INSERT INTO COUNTRYES
+	 VALUES(EMPLOYEES_SEQ.NEXTVAL,#{country_name}, #{region_id} )
+	 </insert>
+	 
+	 <!-- detail -->
+	 <select id="getDetail" resultType="SampleDTO" parameterType="SampleDTO">
+	 	SELECT * FROM COUNTRYES WHERE COUNTRY_ID=#{country_id}
+	 </select>
+	 
+	 <!-- list -->
+	 <select id="getList" resultType="SampleDTO">
+	 	SELECT * FROM COUNTRYES
+	 </select>
+	 </mapper>
+	 
 	 
 		 
