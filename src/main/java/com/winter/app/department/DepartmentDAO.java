@@ -17,9 +17,8 @@ public class DepartmentDAO {
 	private final String naespace="com.winter.app.departmentDAO";
 	
 	//update
-	public int update(DepartmentDTO departmentDTO) throws Exception {
-		Connection con = DBConnector.getConnector();
+
 		
 	}
 
-}
+

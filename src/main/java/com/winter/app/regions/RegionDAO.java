@@ -10,14 +10,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.winter.app.util.DBConnector;
+
+import com.winter.app.util.Pager;
 
 @Repository
 public class RegionDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
 	private final String namespace="com.winter.app.regions.RegionDAO.";
 	
 	//delete
@@ -82,8 +82,8 @@ public class RegionDAO {
 		return sqlSession.selectOne(namespace+"getDetail", regionDTO);
 	}		
 
-	public List<RegionDTO> getList()throws Exception{
-		return sqlSession.selectList(namespace+"getList");
+	public List<RegionDTO> getList(Pager pager)throws Exception{
+		return sqlSession.selectList(namespace+"getList", pager);
 	}
 }
 //		public RegionDTO getDetail(RegionDTO regionDTO)throws Exception{

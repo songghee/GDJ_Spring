@@ -34,7 +34,25 @@
   
   <!-- list -->
   
-  <select id="getList" resultType="RegionDTO">
-  	SELECT * FROM REGIONS
+  <select id="getList" resultType="RegionDTO" parameterType="Pager">
+  	SELECT * FROM
+  	(
+  		SELECT ROWNUM R, RG. * FROM
+  			(
+  				SELECT * FROM REGIONS
+  				ORDER BY REGION_ID DESC
+  			)RG
+  	)
+  	WHERE R BETWEEN #{startRow} AND #{lastRow}
+
   </select>
+  
+  <!-- <select id="getDetail" resultType="java.util.HashMap" parameterType="com.winter.app.regions.RegionDTO">
+		SELECT REGION_ID, REGION_NAME FROM REGIONS WHERE REGION_ID=#{region_id}
+	</select>
+	
+	list
+	<select id="getList" resultType="java.util.HashMap">
+		SELECT * FROM REGIONS
+	</select> -->
 </mapper>
