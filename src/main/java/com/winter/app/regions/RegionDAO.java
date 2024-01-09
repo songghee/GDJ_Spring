@@ -83,8 +83,8 @@ public class RegionDAO {
 		
 	}
 	
-	public Long getTotal() throws Exception{
-		return sqlSession.selectOne(namespace+"getTotal");
+	public Long getTotal(Pager pager) throws Exception{
+		return sqlSession.selectOne(namespace+"getTotal", pager);
 	}
 
 	public List<RegionDTO> getList(Pager pager)throws Exception{

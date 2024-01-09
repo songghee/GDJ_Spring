@@ -10,46 +10,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <c:import url="../temps/bootStrap_css.jsp"></c:import>
 </head>
 <body>
-	
-	<header>
-    	<nav class="navbar bg-dark  navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-		  <div class="container-fluid">
-		    <a class="navbar-brand" href="#">Navbar</a>
-		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-		      <span class="navbar-toggler-icon"></span>
-		    </button>
-		    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-		      <ul class="navbar-nav">
-		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="/">Home</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="./regions/list">Regions</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="/departments/list">Departments</a>
-		        </li>
-		        <li class="nav-item dropdown">
-		          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-		            Dropdown link
-		          </a>
-		          <ul class="dropdown-menu">
-		            <li><a class="dropdown-item" href="#">Action</a></li>
-		            <li><a class="dropdown-item" href="#">Another action</a></li>
-		            <li><a class="dropdown-item" href="#">Something else here</a></li>
-		          </ul>
-		        </li>
-		      </ul>
-		    </div>
-		  </div>
-		</nav>
-    
-    </header>
+	<c:import url="../temps/header.jsp"></c:import>	
 
 	<h1>Regions List</h1>
+	
+	<div>
+		<form class="row g-3">
+		<div class="col-auto">
+			<select name="Kind" class="form-select" aria-label="Default select example">
+			  <option value="Kind1">Title</option>
+			  <option value="Kind2">Contents</option>
+			  <option value="Kind3">Writer</option>
+			  <option value="Kind4">Title+Contents+Writer</option>
+			  
+			</select>
+		</div>
+		
+		  <div class="col-auto">
+		    <label for="search" class="visually-hidden">Search</label>
+		    <input type="text" name="search" class="form-control" id="search">
+		  </div>
+		  <div class="col-auto">
+		    <button type="submit" class="btn btn-primary mb-3">검색</button>
+		  </div>
+		</form>
+	</div>
 	
 	<table class="table table-hover">
 		<thead>
@@ -73,11 +61,35 @@
 		
 	</table>
 	
+	<div>
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination">
+		  	<c:if test="${!pager.start}">
+		    <li class="page-item">
+		      <a class="page-link" href="./list?page=${pager.startNum-1}&search=${pager.search}&kind=${pager.kind}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    </c:if>
+		    
+		    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+		    <li class="page-item"><a class="page-link" href="./list?page=${i}&search=${pager.search}&kind=${pager.kind}">${i}</a></li>
+		    </c:forEach>
+		   
+		   <c:if test="${!pager.last}"> 
+		    <li class="page-item">
+		      <a class="page-link" href="./list?page=${pager.lastNum+1}&search=${pager.search}&kind=${pager.kind}" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		    </c:if>
+		  </ul>
+		</nav>
+	</div>
+	
 	<a href="add" class="btn btn-success">Add</a>
 	
-	
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>	
+	<c:import url="../temps/bootStrap_js.jsp"></c:import>
+ 	
 </body>
 </html>

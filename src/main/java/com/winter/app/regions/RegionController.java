@@ -25,6 +25,7 @@ public class RegionController {
 //		this.regionDAO = new RegionDAO();
 //	}
 	
+	//값을 입력한 후 창(값을 건들 수 없게 post)
 	@RequestMapping(value ="update", method = RequestMethod.POST)
 	public ModelAndView update(RegionDTO regionDTO, ModelAndView mv)throws Exception{
 
@@ -43,6 +44,7 @@ public class RegionController {
 		return mv;
 	}
 	
+	//값을 입력하는 창
 	@RequestMapping(value ="update", method = RequestMethod.GET)
 	public void update(RegionDTO regionDTO, Model model)throws Exception{
 		regionDTO = regionService.getDetail(regionDTO);
