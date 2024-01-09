@@ -32,6 +32,9 @@
   SELECT * FROM REGIONS WHERE REGION_ID=#{region_id}
   </select>
   
+  <!-- getTotal -->
+  <select id="getTotal" resultType="java.lang.Long"></select>
+  
   <!-- list -->
   
   <select id="getList" resultType="RegionDTO" parameterType="Pager">

@@ -80,7 +80,12 @@ public class RegionDAO {
 	//하나만 읽기
 	public RegionDTO getDetail(RegionDTO regionDTO)throws Exception{
 		return sqlSession.selectOne(namespace+"getDetail", regionDTO);
-	}		
+		
+	}
+	
+	public Long getTotal() throws Exception{
+		return sqlSession.selectOne(namespace+"getTotal");
+	}
 
 	public List<RegionDTO> getList(Pager pager)throws Exception{
 		return sqlSession.selectList(namespace+"getList", pager);
