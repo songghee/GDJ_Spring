@@ -7,6 +7,7 @@
 	  <typeAliases>
 	  <!-- Mapper의 type으로 된 주소들은 모두 alias로 바꿔 쓸 수 있다. -->
 	  	<typeAlias type="com.winter.app.regions.RegionDTO" alias="RegionDTO"/>
+	  	<typeAlias type="com.winter.app.regions.RegionFileDTO" alias="RegionFileDTO"/>
 	  	<typeAlias type="com.winter.app.department.DepartmentDTO" alias="DepartmentDTO"/>
 	  	<typeAlias type="com.winter.app.util.Pager" alias="Pager"/>
 	  	

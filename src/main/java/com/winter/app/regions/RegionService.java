@@ -2,10 +2,17 @@ package com.winter.app.regions;
 
 
 
+import java.io.File;
+import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.util.Pager;
 
@@ -15,6 +22,10 @@ public class RegionService {
 	
 	@Autowired
 	private RegionDAO regionDAO;
+	
+	@Autowired
+	//내장객체 중 application
+	private ServletContext servletContext;
 	
 	//delete
 	public int delete(RegionDTO regionDTO)throws Exception{
@@ -27,8 +38,45 @@ public class RegionService {
 	}
 	
 	//insert
-	public int add(RegionDTO regionDTO)throws Exception{
-		return regionDAO.add(regionDTO);
+	public int add(RegionDTO regionDTO, MultipartFile file)throws Exception{
+		int result= regionDAO.add(regionDTO); 
+		
+		//1. 어디에 저장할 것인가??
+		String path =servletContext.getRealPath("/resources/upload");
+		
+		System.out.println(path);
+		File f= new File(path, "regions");
+		
+		//없으면
+		if(!f.exists()) {
+			//새로 만들어라
+			f.mkdirs();
+		}
+		
+		//2. 어떤 파일 명으로 저장할 것인가??
+		//a. 시간 사용
+		Calendar ca = Calendar.getInstance();
+		String fileName = ca.getTimeInMillis()+"_"+file.getOriginalFilename();
+		System.out.println(fileName);
+		
+		//b. UUID(유니버스 유니크 아이디)
+		fileName=UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
+		System.out.println(fileName);
+
+		//3. 파일을 저장
+		//a. FileCopyUtils 클래스 사용
+		f= new File(f, fileName);
+		FileCopyUtils.copy(file.getBytes(), f);
+		
+		//4. DB에 정보 저장
+		RegionFileDTO dto = new RegionFileDTO();
+		dto.setFilName(fileName);
+		dto.setOriName(file.getOriginalFilename());
+		dto.setRegion_id(regionDTO.getRegion_id());
+		regionDAO.addFile(dto);
+		
+		
+		return result; //regionDAO.add(regionDTO);
 	}
 	
 	//detail

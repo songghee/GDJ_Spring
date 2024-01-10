@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.winter.app.util.Pager;
@@ -68,8 +69,10 @@ public class RegionController {
 	
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(RegionDTO regionDTO, Model model) throws Exception {
-		int result = regionService.add(regionDTO);
+	public String add(RegionDTO regionDTO, Model model, MultipartFile photo) throws Exception {
+		int result = regionService.add(regionDTO, photo);
+		System.out.println(photo.getName());
+		System.out.println(photo.getOriginalFilename());
 
 //		String id = request.getParameter("region_id");
 //		String name = request.getParameter("region_name");
@@ -101,7 +104,7 @@ public class RegionController {
 	@RequestMapping(value ="detail", method = RequestMethod.GET)
 //	//파라미터의 이름과 타입을 동일하게 선언
 //	//id
-	public String detail(Integer region_id, Model model)throws Exception{
+	public String detail(Long region_id, Model model)throws Exception{
 		
 //		RegionDAO regionDAO = new RegionDAO();
 		RegionDTO regionDTO = new RegionDTO();

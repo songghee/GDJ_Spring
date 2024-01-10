@@ -28,10 +28,11 @@
 
   
   <sql id="search2">
+  <bind name="p" value="'%'+_parameter.getSearch+'%'"/>
   	<!-- TITLE, CONTENTS, WRITER -->
   	<where>
   	<if test="kind=='kind1' or kind=='kind4'">
-  	TITLE LIKE '%'||#{search}||'%'
+  	TITLE LIKE #{p}
   	</if>
   	
   	<if test="kind=='kind2' or kind=='kind4'">
@@ -63,11 +64,20 @@
   	WHERE REGION_ID=#{region_id}
   </update>
   
+  <insert id="addFile" parameterType="RegionFileDTO">
+  	INSERT INTO REGIONfILES
+  	VALUES(FILE_SEQ.NEXTVAL,#{region_id}, #{fileName}, #{oriName})
+  </insert>
+  
   <!-- Insert -->
   <!-- SEQ: 테이블 매꾸기 -->
   <insert id="add" parameterType="RegionDTO">
+  <!-- keyproperty: 속성 -->
+  	<selectKey keyProperty="region_id" order="BEFORE" resultType="Long">
+  		SELECT EMPLOYEES_SEQ.NEXTVAL FROM DUAL
+  	</selectKey>
   	INSERT INTO REGIONS
-  	VALUES(EMPLOYEES_SEQ.NEXTVAL, #{region_name})
+  	VALUES(#{region_id}, #{region_name})
   </insert>
   
   <!-- detail -->
