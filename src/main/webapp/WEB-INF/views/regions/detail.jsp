@@ -10,7 +10,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   </head>
 <body>
-   <header>
+
+	<c:import url="..//trmps/header.jsp"></c:import>
+	
+	
+	<section class="container-fluid">
+		<div>
+				<c:if test="${not empty dto }">
+				<h3>${dto.region_id }</h3>
+				<div>${dto.region_name }</div>
+				<div>
+						<h2>FILE</h2>
+						<a href="/resources/upload/regions/${dto.regionFileDTO.fileName}">${dto.regionFileDTO.oriName}</a>
+				</div>
+				
+				<a href="">Update</a>
+				
+						<button id="up" data-region-id="${dto.region_id}">Update</button>
+				<button id="del">Delete</button>
+				<form id="frm" action="./delete" method="post">
+						<input type="hidden" name="region_id" value="${dto.region_id }">
+				</form>
+				</c:if>
+		
+				<c:if test="${empty dto }">
+						<h3>없는 번호 입니다</h3>
+				</c:if>
+		</div>
+	
+	
+	
+	
+	</section>
+	
+<%--    <header>
     	<nav class="navbar bg-dark  navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="#">Navbar</a>
@@ -63,7 +96,7 @@
     		<c:if test="${empty dto}">
     			<h3>없는 번호 입니다</h3>
     		</c:if>
-    	</div>
+    	</div> --%>
     
     </section>
 

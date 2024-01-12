@@ -71,8 +71,8 @@ public class RegionController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String add(RegionDTO regionDTO, Model model, MultipartFile photo) throws Exception {
 		int result = regionService.add(regionDTO, photo);
-		System.out.println(photo.getName());
-		System.out.println(photo.getOriginalFilename());
+//		System.out.println(photo.getName());
+//		System.out.println(photo.getOriginalFilename());
 
 //		String id = request.getParameter("region_id");
 //		String name = request.getParameter("region_name");

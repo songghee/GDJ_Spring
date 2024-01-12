@@ -21,10 +21,10 @@
 		<form class="row g-3">
 		<div class="col-auto">
 			<select name="Kind" class="form-select" aria-label="Default select example">
-			  <option value="Kind1">Title</option>
-			  <option value="Kind2">Contents</option>
-			  <option value="Kind3">Writer</option>
-			  <option value="Kind4">Title+Contents+Writer</option>
+			  <option value="a">Title</option>
+			  <option value="a">Contents</option>
+			  <option value="a">Writer</option>
+			  <option value="a">Title+Contents+Writer</option>
 			  
 			</select>
 		</div>
